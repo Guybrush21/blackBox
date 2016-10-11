@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BBCommon;
+using BBConfigurator.Repository;
 
 namespace BBConfigurator
 {
@@ -20,24 +24,44 @@ namespace BBConfigurator
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        ConfigurationViewModel options ; 
+
         public MainWindow()
         {
             InitializeComponent();
+            
+            options = LoadOptionFromXml();
+
+           // this.DataContext = options;
+
+            foreach (var el in options.OptionsCollection)
+            {
+                mainContent.Children.Add(new OptionUC() {DataContext = el});
+            }
+
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private ConfigurationViewModel LoadOptionFromXml()
         {
-            Save();
+            var repo = new ConfiguratorRepository();
+
+            return Mapper.ConfigurationMapper.MapToViewModel(repo.LoadConfiguration());
         }
 
-        private void Save()
+
+        private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            SaveConfiguration();
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void SaveConfiguration()
         {
-            this.Close();
+            var repo = new ConfiguratorRepository();
+
+            var configToSave = Mapper.ConfigurationMapper.MapToModel(options);
+
+            repo.SaveConfiguration(configToSave);
         }
     }
 }

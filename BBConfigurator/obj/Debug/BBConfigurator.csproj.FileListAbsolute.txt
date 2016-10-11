@@ -11,3 +11,8 @@ G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.Properties.Resources.res
 G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.csproj.GenerateResource.Cache
 G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.exe
 G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.pdb
+G:\git\blackBox\BBConfigurator\bin\Debug\BBCommon.dll
+G:\git\blackBox\BBConfigurator\bin\Debug\BBCommon.pdb
+G:\git\BlackBox\BBConfigurator\obj\Debug\OptionUC.baml
+G:\git\BlackBox\BBConfigurator\obj\Debug\OptionUC.g.cs
+G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator_MarkupCompile.lref
