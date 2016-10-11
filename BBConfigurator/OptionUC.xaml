@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="BBConfigurator.OptionUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             x:Name="OptionUserControl">
+    <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label x:Name="orderLabel" Content="{Binding Order}" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
+        <TextBox x:Name="commandTxt" Text="{Binding Path=Command}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
+        <CheckBox x:Name="enableBool" IsChecked="{Binding Enable}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
+    </StackPanel>
+</UserControl>
