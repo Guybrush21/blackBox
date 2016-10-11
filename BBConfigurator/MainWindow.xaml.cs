@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BBCommon;
 using BBConfigurator.Repository;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace BBConfigurator
 {
@@ -24,13 +25,15 @@ namespace BBConfigurator
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        ConfigurationViewModel options ; 
+        private TaskbarIcon tb;
+        ConfigurationViewModel options; 
 
         public MainWindow()
         {
             InitializeComponent();
+            tb = (TaskbarIcon)FindResource("NotifyTrayTaskbarIcon");
             
+
             options = LoadOptionFromXml();
 
            // this.DataContext = options;

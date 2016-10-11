@@ -16,3 +16,10 @@ G:\git\blackBox\BBConfigurator\bin\Debug\BBCommon.pdb
 G:\git\BlackBox\BBConfigurator\obj\Debug\OptionUC.baml
 G:\git\BlackBox\BBConfigurator\obj\Debug\OptionUC.g.cs
 G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator_MarkupCompile.lref
+G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll
+G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.pdb
+G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.xml
+G:\git\BlackBox\BBConfigurator\obj\Debug\App.baml
+G:\git\BlackBox\BBConfigurator\obj\Debug\IconTrayUC.baml
+G:\git\BlackBox\BBConfigurator\obj\Debug\IconTrayUC.g.cs
+G:\git\BlackBox\BBConfigurator\obj\Debug\GeneratedInternalTypeHelper.g.cs
