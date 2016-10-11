@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace BBConfigurator
 {
@@ -23,6 +24,19 @@ namespace BBConfigurator
         public OptionUC()
         {
             InitializeComponent();
+        }
+
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(
+                Environment.SpecialFolder.ProgramFiles);
+            dialog.Multiselect = false;
+
+            if (dialog.ShowDialog() == true)
+            {
+                commandTxt.Text = dialog.FileName;
+            }
         }
     }
 }

@@ -8,6 +8,8 @@
     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Label x:Name="orderLabel" Content="{Binding Order}" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
         <TextBox x:Name="commandTxt" Text="{Binding Path=Command}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
-        <CheckBox x:Name="enableBool" IsChecked="{Binding Enable}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
+        <Button x:Name="btnBrowse" Content="Browse..." Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnBrowse_Click"/>
+        <Separator Width="35" Visibility="Hidden"/>
+        <CheckBox Content="Enable" x:Name="enableBool" IsChecked="{Binding Enable}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
     </StackPanel>
 </UserControl>
