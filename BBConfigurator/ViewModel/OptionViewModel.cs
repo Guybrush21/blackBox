@@ -9,9 +9,29 @@ using System.Threading.Tasks;
 namespace BBConfigurator
 {
 
-    public class ConfigurationViewModel 
+    public class ConfigurationViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<String> ComPortsAvailableList { get; set; }
+
+        private string _port;
+
+        public String PortName {
+            get { return _port; }
+            set
+            {
+                _port = value;
+                NotifyPropertyChanged("PortName");
+            }
+        }
         public ObservableCollection<OptionViewModel> OptionsCollection { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
     }
 
     public class OptionViewModel : INotifyPropertyChanged

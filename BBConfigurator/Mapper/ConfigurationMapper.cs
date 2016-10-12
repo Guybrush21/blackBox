@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,9 @@ namespace BBConfigurator.Mapper
                 
                 configuration.Commands.Add(opt);
             }
+
+            configuration.SerialPortName = view.PortName;
+
             return configuration;
         }
 
@@ -33,7 +38,7 @@ namespace BBConfigurator.Mapper
         {
             ConfigurationViewModel view = new ConfigurationViewModel();
             view.OptionsCollection = new ObservableCollection<OptionViewModel>();
-
+         
             foreach (var cmd in config.Commands)
             {
                 OptionViewModel option = new OptionViewModel();
@@ -43,6 +48,14 @@ namespace BBConfigurator.Mapper
 
                 view.OptionsCollection.Add(option);
             }
+
+            view.ComPortsAvailableList = new ObservableCollection<string>();
+            foreach (var p in SerialPort.GetPortNames().ToList())
+            {
+                view.ComPortsAvailableList.Add(p);
+            }
+
+            view.PortName = config.SerialPortName;
 
             return view;
         }

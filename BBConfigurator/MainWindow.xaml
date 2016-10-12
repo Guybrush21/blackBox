@@ -6,19 +6,23 @@
     xmlns:BBCommon="clr-namespace:BBCommon;assembly=BBCommon"
     xmlns:bbConfigurator="clr-namespace:BBConfigurator"
     xmlns:tb="http://www.hardcodet.net/taskbar"
-    xmlns:commands="clr-namespace:BBConfigurator.Commands"
     x:Name="ConfiguratorWindow"
     mc:Ignorable="d" x:Class="BBConfigurator.MainWindow"
         Title="BlackBox Configurator" HorizontalAlignment="Center" VerticalAlignment="Center" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Icon="ConfiguratorIcon.png" >
     
     <DockPanel Margin="10">
+
+        <StackPanel DockPanel.Dock="Top" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="COM PORT:" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+            <ComboBox Margin="2"  x:Name="PortComboBox" SelectedItem="{Binding Path=PortName}" ItemsSource="{Binding ComPortsAvailableList}" SelectionChanged="PortComboBox_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center" ></ComboBox>
+        </StackPanel>
+        <Separator></Separator>
         <StackPanel DockPanel.Dock="Bottom" Margin="10,0,0,0">
             <Button x:Name="btnSave" Content="Save" Margin="5" Click="BtnSave_OnClick"/>
         </StackPanel>
         <StackPanel x:Name="mainContent"  Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2">
 
         </StackPanel>
-
 
         <tb:TaskbarIcon x:Name="Taskbar" 
                     IconSource="ConfiguratorIcon.ico"

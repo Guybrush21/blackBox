@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 
 namespace BBCommon
 {
@@ -14,6 +15,7 @@ namespace BBCommon
             get
             {
                 return Path.GetExtension(Command).ToLower() == "exe";
+                
             }
         }
 
@@ -21,6 +23,8 @@ namespace BBCommon
 
     public class Configuration
     {
+        public String SerialPortName{ get; set; }
+
         public List<Option> Commands { get; set; }
 
     }

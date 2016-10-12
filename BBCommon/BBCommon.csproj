@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BBConfiguration.xml" />

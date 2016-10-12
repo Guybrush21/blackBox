@@ -56,7 +56,6 @@ namespace BlackBox
             {
                 try
                 {
-
                     expolore.CloseMainWindow();
                     expolore.Close();
                     expolore = null;
