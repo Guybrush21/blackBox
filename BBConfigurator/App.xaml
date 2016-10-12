@@ -3,17 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml"
              xmlns:local="clr-namespace:BBConfigurator"
-             xmlns:tb="http://www.hardcodet.net/taskbar">
-    
+            >
+
     <Application.Resources>
 
-        <tb:TaskbarIcon x:Key="NotifyTrayTaskbarIcon"
-                  IconSource="ConfiguratorIcon.ico"
-                  ToolTipText="BlackBox Configurator">
-            <tb:TaskbarIcon.TrayToolTip>
-            <local:IconTrayUC></local:IconTrayUC>
-            </tb:TaskbarIcon.TrayToolTip>
-        </tb:TaskbarIcon>
-            
+       
+
     </Application.Resources>
 </Application>

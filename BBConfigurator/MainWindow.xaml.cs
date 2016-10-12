@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BBCommon;
+using BBConfigurator.Commands;
 using BBConfigurator.Repository;
 using Hardcodet.Wpf.TaskbarNotification;
 
@@ -31,19 +32,17 @@ namespace BBConfigurator
         public MainWindow()
         {
             InitializeComponent();
-            tb = (TaskbarIcon)FindResource("NotifyTrayTaskbarIcon");
             
+            Closing += OnClosing;
 
             options = LoadOptionFromXml();
-
-           // this.DataContext = options;
-
             foreach (var el in options.OptionsCollection)
             {
                 mainContent.Children.Add(new OptionUC() {DataContext = el});
             }
 
         }
+        
 
         private ConfigurationViewModel LoadOptionFromXml()
         {
@@ -66,5 +65,32 @@ namespace BBConfigurator
 
             repo.SaveConfiguration(configToSave);
         }
+
+        private void ShowHideMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if(this.Visibility == Visibility.Visible)
+                this.Visibility = Visibility.Collapsed;
+            else
+                this.Visibility = Visibility.Visible;
+        }
+
+        private void CloseMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Application.Current.Shutdown();
+        }
+
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            this.Visibility = Visibility.Collapsed;
+            cancelEventArgs.Cancel = true;
+        }
+
+        private void RestartMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+
+

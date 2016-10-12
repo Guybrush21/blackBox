@@ -1,5 +1,4 @@
 G:\git\blackBox\BBCommon\bin\Debug\BBCommon.dll
 G:\git\blackBox\BBCommon\bin\Debug\BBCommon.pdb
-G:\git\blackBox\BBCommon\obj\Debug\BBCommon.csprojResolveAssemblyReference.cache
 G:\git\blackBox\BBCommon\obj\Debug\BBCommon.dll
 G:\git\blackBox\BBCommon\obj\Debug\BBCommon.pdb

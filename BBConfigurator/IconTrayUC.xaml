@@ -10,7 +10,6 @@
     BorderBrush="Orange"
     BorderThickness="2"
     CornerRadius="4"
-    Opacity="0.8"
     Width="160"
     Height="40">
         <TextBlock
