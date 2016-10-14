@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Interop;
 using BBCommon;
 
 namespace BBConfigurator.Repository
 {
     public class BlackboxRepository
     {
+        private Configuration configuration;
+
         public void InitWorker()
         {
             var configRepo = new ConfiguratorRepository();
@@ -21,11 +25,12 @@ namespace BBConfigurator.Repository
             //_workerThread.Name = "BlacBoxWorker";
 
             //_workerThread.Start();
+            configuration = configRepo.LoadConfiguration();
 
-            SerialPort port = new SerialPort(configRepo.LoadConfiguration().SerialPortName, 9600);
+            SerialPort port = new SerialPort(configuration.SerialPortName, 9600);
             port.Open();
             port.DataReceived += PortOnDataReceived;
-
+            
         }
 
         private void PortOnDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -34,7 +39,20 @@ namespace BBConfigurator.Repository
 
             string s = port.ReadLine();
 
-            Console.WriteLine(s);
+            ExecuteProgram(s);
+
+        }
+
+        private void ExecuteProgram(string s)
+        {
+            int order;
+            if (!Int32.TryParse(s, out order))
+                return;
+
+            ProcessStartInfo info = new ProcessStartInfo( configuration.Commands.First(x=>x.Order == order).Command);
+
+            Process.Start(info);
+
 
         }
 
