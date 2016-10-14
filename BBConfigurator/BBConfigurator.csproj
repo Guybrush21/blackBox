@@ -64,14 +64,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\CustomCommands.cs" />
-    <Compile Include="IconTrayUC.xaml.cs">
-      <DependentUpon>IconTrayUC.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Repository\BlackboxRepository.cs" />
     <Compile Include="Repository\ConfiguratorRepository.cs" />
-    <Page Include="IconTrayUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

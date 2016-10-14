@@ -14,19 +14,22 @@ namespace BBConfigurator
     public partial class MainWindow : Window
     {
         private ConfigurationViewModel _configurationViewModel;
-        
-        private Worker _worker;
-        private Thread _workerThread;
+
+        private BlackboxRepository _bbRepository;
+        private ConfiguratorRepository _configuratorRepository;
 
         public MainWindow()
         {
             InitializeComponent();
             
+            _bbRepository = new BlackboxRepository();
+            _configuratorRepository = new ConfiguratorRepository();
+            
             Init();
             DataContext = _configurationViewModel;
             Closing += OnClosing;
 
-            InitWorker();
+            _bbRepository.InitWorker();
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
@@ -36,15 +39,9 @@ namespace BBConfigurator
 
         private void CloseMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            StopWorker();
+            _bbRepository.StopWorker();
             this.Close();
             Application.Current.Shutdown();
-        }
-
-        private void StopWorker()
-        {
-            _worker.RequestStop();
-            while (_workerThread.IsAlive) ;
         }
 
         private void Init()
@@ -54,26 +51,14 @@ namespace BBConfigurator
             {
                 mainContent.Children.Add(new OptionUC() { DataContext = el });
             }
-
-
         }
 
-        private void InitWorker()
-        {
-            _worker = new Worker();
-            _workerThread = new Thread(_worker.Main);
-            _workerThread.Name = "BlacBoxWorker";
-
-            _workerThread.Start();
-        }
 
         private ConfigurationViewModel LoadConfigurationViewModel()
         {
             var repo = new ConfiguratorRepository();
 
             return Mapper.ConfigurationMapper.MapToViewModel(repo.LoadConfiguration());
-
-
         }
 
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
@@ -84,9 +69,7 @@ namespace BBConfigurator
 
         private void RestartMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            _worker.RequestStop();
-            while (_workerThread.IsAlive) ;
-            _workerThread.Start();
+            _bbRepository.ResetWorker();
         }
 
         private void SaveConfiguration()

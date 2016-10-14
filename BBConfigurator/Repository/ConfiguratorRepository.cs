@@ -12,9 +12,8 @@ namespace BBConfigurator.Repository
 {
     public class ConfiguratorRepository
     {
-
         private string savePath = "store.xml";
-
+        
         public void SaveConfiguration(Configuration config)
         {
             Serialize(config, savePath);

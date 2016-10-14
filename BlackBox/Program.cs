@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,6 +19,8 @@ namespace BlackBox
             try
             {
 
+                SerialPort p = new SerialPort("COM6",9600);
+                p.Open();
                 string option = "";
                 while (option != "3")
                 {
@@ -26,18 +29,10 @@ namespace BlackBox
                     Console.WriteLine("3. Exit");
 
                     option = Console.ReadLine();
-                    switch (option)
-                    {
-                        case "1":
-                            ToggleFF();
-                            break;
-                        case "2":
-                            ToggleExplorer();
-                            break;
-                        case "3":
-                            break;
 
-                    }
+                    p.WriteLine(option);
+
+
                 }
 
             }
@@ -48,41 +43,6 @@ namespace BlackBox
 
         }
 
-        private static void ToggleExplorer()
-        {
-            if(expolore == null)
-                expolore = Process.Start(@"explorer.exe");
-            else
-            {
-                try
-                {
-                    expolore.CloseMainWindow();
-                    expolore.Close();
-                    expolore = null;
-                }
-                catch(Exception e)
-                {
-                    expolore.Kill();
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            foreach (var p in Process.GetProcessesByName("explorer"))
-            {
-                Console.WriteLine(p.MainWindowTitle);
-            }
-        }
-
-        private static void ToggleFF()
-        {
-            if (ff == null)
-                ff = Process.Start(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe");
-            else
-            {
-                ff.CloseMainWindow();
-                ff.Close();
-                ff = null;
-            }
-        }
+        
     }
 }
