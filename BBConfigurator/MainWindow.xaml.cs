@@ -29,7 +29,7 @@ namespace BBConfigurator
             DataContext = _configurationViewModel;
             Closing += OnClosing;
 
-            _bbRepository.InitWorker();
+            _bbRepository.InitBlackbox();
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace BBConfigurator
 
         private void CloseMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            _bbRepository.StopWorker();
+            //_bbRepository.StopWorker();
             this.Close();
             Application.Current.Shutdown();
         }
@@ -69,7 +69,7 @@ namespace BBConfigurator
 
         private void RestartMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            _bbRepository.ResetWorker();
+            _bbRepository.Restart();
         }
 
         private void SaveConfiguration()

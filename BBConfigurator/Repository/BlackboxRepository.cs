@@ -14,8 +14,10 @@ namespace BBConfigurator.Repository
     public class BlackboxRepository
     {
         private Configuration configuration;
+        static private Dictionary<int, Process> processList;
+        private SerialPort port;
 
-        public void InitWorker()
+        public void InitBlackbox()
         {
             var configRepo = new ConfiguratorRepository();
             
@@ -26,11 +28,20 @@ namespace BBConfigurator.Repository
 
             //_workerThread.Start();
             configuration = configRepo.LoadConfiguration();
+            processList = new Dictionary<int, Process>();
 
-            SerialPort port = new SerialPort(configuration.SerialPortName, 9600);
+
+            port = new SerialPort(configuration.SerialPortName, 9600);
+            
             port.Open();
             port.DataReceived += PortOnDataReceived;
             
+        }
+
+        public void Restart()
+        {
+            port.Close();
+            InitBlackbox();
         }
 
         private void PortOnDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -39,34 +50,53 @@ namespace BBConfigurator.Repository
 
             string s = port.ReadLine();
 
-            ExecuteProgram(s);
+            ExecuteCommand(s);
 
         }
 
-        private void ExecuteProgram(string s)
+        private void ExecuteCommand(string s)
         {
             int order;
             if (!Int32.TryParse(s, out order))
                 return;
 
-            ProcessStartInfo info = new ProcessStartInfo( configuration.Commands.First(x=>x.Order == order).Command);
+            Option option = configuration.Commands.First(x => x.Order == order);
 
-            Process.Start(info);
-
-
+            if (!processList.ContainsKey(order))
+                StartProcess(option);
+            else
+                StopProcess(option);
         }
 
-        public void StopWorker()
+        private void StartProcess(Option option)
         {
-            //_worker.RequestStop();
-            //while (_workerThread.IsAlive) ;
+            var process = new Process();
+
+            ProcessStartInfo info = new ProcessStartInfo(option.Command);
+            process.StartInfo = info;
+            process.Start();
+            processList.Add(option.Order, process);
         }
 
-        public void ResetWorker()
+        private void StopProcess(Option option)
         {
-            //StopWorker();
+            var process = processList[option.Order];
+            try
+            {
 
-            //this.InitWorker();
+                
+                process.CloseMainWindow();
+                process.WaitForExit();
+                process.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            processList.Remove(option.Order);
+
         }
+
     }
 }

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-G:\git\BlackBox\BBConfigurator\obj\Debug\
+G:\git\blackBox\BBConfigurator\obj\Debug\
 BBConfigurator
 none
 false
 DEBUG;TRACE
-G:\git\BlackBox\BBConfigurator\App.xaml
+G:\git\blackBox\BBConfigurator\App.xaml
 21520124754
 
 16180263668
-211437765208
+211477325911
 MainWindow.xaml;OptionUC.xaml;
 
 False

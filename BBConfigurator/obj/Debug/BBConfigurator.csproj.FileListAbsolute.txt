@@ -19,3 +19,7 @@ G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator_MarkupCompile.lref
 G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll
 G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.pdb
 G:\git\BlackBox\BBConfigurator\bin\Debug\Hardcodet.Wpf.TaskbarNotification.xml
+G:\git\BlackBox\BBConfigurator\bin\Debug\BBConfigurator.exe.manifest
+G:\git\BlackBox\BBConfigurator\bin\Debug\BBConfigurator.application
+G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.exe.manifest
+G:\git\BlackBox\BBConfigurator\obj\Debug\BBConfigurator.application

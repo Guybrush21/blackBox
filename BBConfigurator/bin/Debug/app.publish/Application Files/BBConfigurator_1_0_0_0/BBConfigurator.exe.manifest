@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="BBConfigurator.exe" version="1.0.0.0" publicKeyToken="2a4cd04f0869aafd" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="BBConfigurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="BBConfigurator.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBCommon.dll" size="6656">
+      <assemblyIdentity name="BBCommon" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>OWkIGilYROUb8/OxeQAwq7ha+FqpeeK7M+sdzOx0ke8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBConfigurator.exe" size="37376">
+      <assemblyIdentity name="BBConfigurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>SJsqkZ2g9Mmmqw9i+p4w4vmpVVUInE8MUc7rguUDzwU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hardcodet.Wpf.TaskbarNotification.dll" size="45056">
+      <assemblyIdentity name="Hardcodet.Wpf.TaskbarNotification" version="1.0.5.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>QB8Gq0LIxnXHgm1V9FzohAS+1SKTFAQo60q2M51iPsk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="BBConfigurator.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xm4bo26HQ0LNVwz1vdPYtzhkpMnp2AI5i+f0b+OahTI=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=EURIS\pellizer" issuerKeyHash="d700ff6fdd7ec2addfbcb106ca1fd85403a40a6e" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>tU9EdZq8uvUNIKUHVAsMzdIhhTjArTEwINlQPakSGtQ=</DigestValue></Reference></SignedInfo><SignatureValue>DUN105vOOUISt45v0TbDFXK5n42BsGlS0vFRcQfEGhyV+g7LszE7A7Z46s+tAh7ufNR6FoxDN4hu5RZrjk8J25lottnsk8TfLw4Ox5xcL1gJDKX5WA3SrtrnYIWRG1FDOkxu1WsI7MDpbvaHFdQkpozhlOR5D94TFbfnaLIwbUk=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>3H6BV0/XJMYWwCrjcLzrWXp1joG/52K4gSfOazutUw48LBuuLuF5DjJJGq15oDN93GTvsXnYFewwJYuF1oO61HooIAmnbBE7SzHM+7d55BzB3Oz7WXBYRhpfeAVA3zM6StnFSLY5emUXuK0PZneFcV5xOKYUwg2wK2EF4HDoH1k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="d41a12a93d50d9203031adc0388521d2cd0c0b5407a5200df5babc9a75444fb5" Description="" Url=""><as:assemblyIdentity name="BBConfigurator.exe" version="1.0.0.0" publicKeyToken="2a4cd04f0869aafd" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=EURIS\pellizer</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>7Y9eLO06t4FCClS9nLP5jNg6TVTZouFg7exRhV747Fw=</DigestValue></Reference></SignedInfo><SignatureValue>CDyD46ReWQfeiZCKWZlXTdJ61rT4DAaQb0RsGEm57v3i4qeyfgt3Ui7dq7nCMueDCVxtzk8R6Lnp0fHetCn1hsKK1kaBtF6VuH0F8jdGZAFK66Ne5lJV8JfI39fSeh76/UklFK+GwkopYjvOl9IDR8/llj/KIRA7+I2uJnSNat8=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>3H6BV0/XJMYWwCrjcLzrWXp1joG/52K4gSfOazutUw48LBuuLuF5DjJJGq15oDN93GTvsXnYFewwJYuF1oO61HooIAmnbBE7SzHM+7d55BzB3Oz7WXBYRhpfeAVA3zM6StnFSLY5emUXuK0PZneFcV5xOKYUwg2wK2EF4HDoH1k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB0TCCATqgAwIBAgIQNc0Kzvd3R6xHquZEyyGOWDANBgkqhkiG9w0BAQsFADAnMSUwIwYDVQQDHhwARQBVAFIASQBTAFwAcABlAGwAbABpAHoAZQByMB4XDTE2MTAxNDE0NTYwNloXDTE3MTAxNDIwNTYwNlowJzElMCMGA1UEAx4cAEUAVQBSAEkAUwBcAHAAZQBsAGwAaQB6AGUAcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA3H6BV0/XJMYWwCrjcLzrWXp1joG/52K4gSfOazutUw48LBuuLuF5DjJJGq15oDN93GTvsXnYFewwJYuF1oO61HooIAmnbBE7SzHM+7d55BzB3Oz7WXBYRhpfeAVA3zM6StnFSLY5emUXuK0PZneFcV5xOKYUwg2wK2EF4HDoH1kCAwEAATANBgkqhkiG9w0BAQsFAAOBgQAXzolZLSlg9jFV/YSJp0B4nSbQWdxDAEXJUkN10S1sX6JMuefke+PybYTnpjMHpAqnBJ5vW6FQ3aE7HrKBZEavyYnyJnrN/qRtWEIlfepXHN6OOIN/JkH0IUByfsZaHuq/3QbdIF1I1/q/ExoPvPSfZ5NYolrXiMC8N+4MxUWbTw==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
