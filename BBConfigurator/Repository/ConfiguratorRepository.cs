@@ -42,7 +42,7 @@ namespace BBConfigurator.Repository
         {
             Configuration config = new Configuration();
             config.Commands = new List<Option>();
-
+            config.SerialPortName = String.Empty;
             for (int i = 0; i < 6; i++)
             {
                 Option op = new Option(){Command = "", Enable = false, Order = i + 1};

@@ -1,12 +1,6 @@
-﻿using BBCommon;
-using BBConfigurator.Repository;
-using Hardcodet.Wpf.TaskbarNotification;
+﻿using BBConfigurator.Repository;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO.Ports;
-using System.Linq;
-using System.Threading;
 using System.Windows;
 
 namespace BBConfigurator
@@ -21,15 +15,21 @@ namespace BBConfigurator
         public MainWindow()
         {
             InitializeComponent();
-            
-            _bbRepository = new BlackboxRepository();
-            _configuratorRepository = new ConfiguratorRepository();
-            
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             Init();
+
             DataContext = _configurationViewModel;
+
             Closing += OnClosing;
 
             _bbRepository.InitBlackbox();
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Taskbar.ShowBalloonTip("Error", (e.ExceptionObject as Exception).Message, Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Error);
+            //MessageBox.Show((e.ExceptionObject as Exception).Message);
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
@@ -38,14 +38,16 @@ namespace BBConfigurator
         }
 
         private void CloseMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            //_bbRepository.StopWorker();
+        {            
             this.Close();
             Application.Current.Shutdown();
         }
 
         private void Init()
         {
+            _bbRepository = new BlackboxRepository();
+            _configuratorRepository = new ConfiguratorRepository();
+
             _configurationViewModel = LoadConfigurationViewModel();
             foreach (var el in _configurationViewModel.OptionsCollection)
             {
@@ -56,9 +58,7 @@ namespace BBConfigurator
 
         private ConfigurationViewModel LoadConfigurationViewModel()
         {
-            var repo = new ConfiguratorRepository();
-
-            return Mapper.ConfigurationMapper.MapToViewModel(repo.LoadConfiguration());
+            return Mapper.ConfigurationMapper.MapToViewModel(_configuratorRepository.LoadConfiguration());
         }
 
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)

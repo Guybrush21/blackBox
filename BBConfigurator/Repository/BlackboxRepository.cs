@@ -20,21 +20,20 @@ namespace BBConfigurator.Repository
         public void InitBlackbox()
         {
             var configRepo = new ConfiguratorRepository();
-            
-            //_worker = new Worker(configRepo.LoadConfiguration());
-
-            //_workerThread = new Thread(_worker.Main);
-            //_workerThread.Name = "BlacBoxWorker";
-
-            //_workerThread.Start();
             configuration = configRepo.LoadConfiguration();
             processList = new Dictionary<int, Process>();
 
+            try
+            {
+                port = new SerialPort(configuration.SerialPortName, 9600);
 
-            port = new SerialPort(configuration.SerialPortName, 9600);
-            
-            port.Open();
-            port.DataReceived += PortOnDataReceived;
+                port.Open();
+                port.DataReceived += PortOnDataReceived;
+
+            }
+            catch (Exception ex){
+                throw new Exception("Impossible to open Serial Port: " + port.PortName);
+            }
             
         }
 
