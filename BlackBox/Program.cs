@@ -22,11 +22,12 @@ namespace BlackBox
                 SerialPort p = new SerialPort("COM6",9600);
                 p.Open();
                 string option = "";
-                while (option != "3")
+                while (option != "9")
                 {
+
                     Console.WriteLine("1. Firefox");
                     Console.WriteLine("2. Explorer");
-                    Console.WriteLine("3. Exit");
+                    Console.WriteLine("9. Exit");
 
                     option = Console.ReadLine();
 

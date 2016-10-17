@@ -19,6 +19,8 @@ namespace BBCommon
             }
         }
 
+
+        public bool CanBeKilled { get; set; }
     }
 
     public class Configuration
@@ -26,6 +28,5 @@ namespace BBCommon
         public String SerialPortName{ get; set; }
 
         public List<Option> Commands { get; set; }
-
     }
 }

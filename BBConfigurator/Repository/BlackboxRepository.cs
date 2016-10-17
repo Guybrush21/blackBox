@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -25,27 +26,32 @@ namespace BBConfigurator.Repository
 
             try
             {
-                port = new SerialPort(configuration.SerialPortName, 9600);
+                if (!String.IsNullOrEmpty(configuration.SerialPortName))
+                {
+                    port = new SerialPort(configuration.SerialPortName, 9600);
 
-                port.Open();
-                port.DataReceived += PortOnDataReceived;
+                    port.Open();
+                    port.DataReceived += PortOnDataReceived;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossible to open Serial Port: " + configuration.SerialPortName);
+            }
 
-            }
-            catch (Exception ex){
-                throw new Exception("Impossible to open Serial Port: " + port.PortName);
-            }
-            
         }
 
         public void Restart()
         {
-            port.Close();
+            if(port.IsOpen)
+                port.Close();
+
             InitBlackbox();
         }
 
         private void PortOnDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            var port = (SerialPort) sender;
+            var port = (SerialPort)sender;
 
             string s = port.ReadLine();
 
@@ -80,14 +86,22 @@ namespace BBConfigurator.Repository
         private void StopProcess(Option option)
         {
             var process = processList[option.Order];
+
+            if (process.HasExited)
+            {
+                var exeName = Path.GetFileNameWithoutExtension(option.Command);
+                process = Process.GetProcessesByName(exeName).First(p => p.StartTime == Process.GetProcessesByName(exeName).Max(x=>x.StartTime));
+            }
             try
             {
-
+                if (process.CloseMainWindow())
+                {
+                    process.WaitForExit(400);
+                    process.Close();
+                }
                 
-                process.CloseMainWindow();
-                process.WaitForExit();
-                process.Close();
-
+                    
+                    
             }
             catch (Exception e)
             {

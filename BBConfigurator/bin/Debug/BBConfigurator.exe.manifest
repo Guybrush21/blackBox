@@ -42,11 +42,6 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="PresentationUI" version="4.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
-    </dependentAssembly>
-  </dependency>
-  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBCommon.dll" size="6656">
       <assemblyIdentity name="BBCommon" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -54,19 +49,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OWkIGilYROUb8/OxeQAwq7ha+FqpeeK7M+sdzOx0ke8=</dsig:DigestValue>
+        <dsig:DigestValue>mPowDVaTcabypLsO8BgdOR8Aa/hU6Cr5xYsUrznYy9Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBConfigurator.exe" size="37304">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBConfigurator.exe" size="38912">
       <assemblyIdentity name="BBConfigurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>j5DqV2nfV5rbfi2Ek3AEvoo5qPWSfW8yMBY1iXAEQMw=</dsig:DigestValue>
+        <dsig:DigestValue>eBhLG3zr1HRLG8jmxT7Cygs+H+9zziNkJ0J//Tm5ILQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

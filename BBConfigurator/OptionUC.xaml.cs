@@ -35,7 +35,7 @@ namespace BBConfigurator
 
             if (dialog.ShowDialog() == true)
             {
-                commandTxt.Text = dialog.FileName;
+                (this.DataContext as OptionViewModel).Command = dialog.FileName;
             }
         }
     }
