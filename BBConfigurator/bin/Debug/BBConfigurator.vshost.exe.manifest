@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBConfigurator.exe" size="38912">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BBConfigurator.exe" size="40960">
       <assemblyIdentity name="BBConfigurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eBhLG3zr1HRLG8jmxT7Cygs+H+9zziNkJ0J//Tm5ILQ=</dsig:DigestValue>
+        <dsig:DigestValue>/95a9NezME2kvEaJI2H1Dp6Q6nNaIdifox4KfLdrPiU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

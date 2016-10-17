@@ -1,27 +1,25 @@
-﻿using System;
+﻿using BBCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using BBCommon;
 
 namespace BBConfigurator.Repository
 {
     public class ConfiguratorRepository
     {
         private string savePath = "store.xml";
-        
-        public void SaveConfiguration(Configuration config)
-        {
-            Serialize(config, savePath);
-        }
 
         public Configuration LoadConfiguration()
         {
             return Deserialize(savePath);
+        }
+
+        public void SaveConfiguration(Configuration config)
+        {
+            Serialize(config, savePath);
         }
 
         private Configuration Deserialize(string filename)
@@ -45,12 +43,11 @@ namespace BBConfigurator.Repository
             config.SerialPortName = String.Empty;
             for (int i = 0; i < 6; i++)
             {
-                Option op = new Option(){Command = "", Enable = false, Order = i + 1};
+                Option op = new Option() { Command = "", Enable = false, Order = i + 1 };
                 config.Commands.Add(op);
             }
             return config;
         }
-
 
         private void Serialize(Configuration item, string filename)
         {
@@ -62,8 +59,6 @@ namespace BBConfigurator.Repository
 
                 writer.Close();
             }
-
-
         }
     }
 }

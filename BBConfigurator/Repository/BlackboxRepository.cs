@@ -1,22 +1,36 @@
-﻿using System;
+﻿using BBCommon;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Interop;
-using BBCommon;
 
 namespace BBConfigurator.Repository
 {
+    public delegate void ActionOccurredHandler(object sender, ActionEventArgs e);
+
+    public class ActionEventArgs : EventArgs
+    {
+        public enum ActionEnum
+        {
+            ProcessStarted, 
+            ProcessStopped, 
+            BlackBoxRestarted,
+            ExceptionHappen
+        }
+
+        public ActionEnum Action { get; set; }
+        public String Program { get; set; }
+    }
+
     public class BlackboxRepository
     {
-        private Configuration configuration;
         static private Dictionary<int, Process> processList;
+        private Configuration configuration;
         private SerialPort port;
+
+        public event ActionOccurredHandler OnAction;
 
         public void InitBlackbox()
         {
@@ -36,26 +50,19 @@ namespace BBConfigurator.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("Impossible to open Serial Port: " + configuration.SerialPortName);
+                throw new Exception("Error occured in listenting for Serial Port: " + configuration.SerialPortName);
             }
-
         }
 
         public void Restart()
         {
-            if(port.IsOpen)
+            if (port.IsOpen)
                 port.Close();
 
             InitBlackbox();
-        }
-
-        private void PortOnDataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            var port = (SerialPort)sender;
-
-            string s = port.ReadLine();
-
-            ExecuteCommand(s);
+            
+            if(OnAction != null)
+                OnAction(this, new ActionEventArgs(){Action = ActionEventArgs.ActionEnum.BlackBoxRestarted });
 
         }
 
@@ -73,6 +80,15 @@ namespace BBConfigurator.Repository
                 StopProcess(option);
         }
 
+        private void PortOnDataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            var port = (SerialPort)sender;
+
+            string s = port.ReadLine();
+
+            ExecuteCommand(s);
+        }
+
         private void StartProcess(Option option)
         {
             var process = new Process();
@@ -81,35 +97,39 @@ namespace BBConfigurator.Repository
             process.StartInfo = info;
             process.Start();
             processList.Add(option.Order, process);
+
+            if (OnAction != null)
+                OnAction(this, new ActionEventArgs()
+                {
+                    Action = ActionEventArgs.ActionEnum.ProcessStarted,
+                    Program = process.ProcessName
+                });
+
         }
 
         private void StopProcess(Option option)
         {
             var process = processList[option.Order];
+            string procssName = process.ProcessName;
 
             if (process.HasExited)
             {
-                var exeName = Path.GetFileNameWithoutExtension(option.Command);
-                process = Process.GetProcessesByName(exeName).First(p => p.StartTime == Process.GetProcessesByName(exeName).Max(x=>x.StartTime));
+                process = Process.GetProcessesByName(process.ProcessName).OrderByDescending(x => x.StartTime).First();
             }
-            try
+            if (process.CloseMainWindow())
             {
-                if (process.CloseMainWindow())
-                {
-                    process.WaitForExit(400);
-                    process.Close();
-                }
-                
-                    
-                    
+                process.WaitForExit(4000);
+                process.Close();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+
             processList.Remove(option.Order);
 
+            if (OnAction != null)
+                OnAction(this, new ActionEventArgs()
+                {
+                    Action = ActionEventArgs.ActionEnum.ProcessStopped,
+                    Program = procssName
+                });
         }
-
     }
 }
