@@ -1,6 +1,0 @@
-G:\git\BlackBox\BlackBox\bin\Debug\BlackBox.exe.config
-G:\git\BlackBox\BlackBox\bin\Debug\BlackBox.exe
-G:\git\BlackBox\BlackBox\bin\Debug\BlackBox.pdb
-G:\git\BlackBox\BlackBox\obj\Debug\BlackBox.csprojResolveAssemblyReference.cache
-G:\git\BlackBox\BlackBox\obj\Debug\BlackBox.exe
-G:\git\BlackBox\BlackBox\obj\Debug\BlackBox.pdb
