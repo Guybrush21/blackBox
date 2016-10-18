@@ -25,7 +25,8 @@ namespace BBConfigurator.Mapper
                 opt.Command = option.Command;
                 opt.Enable = option.Enable;
                 opt.Order = option.Order;
-                
+                opt.Name = option.Name;
+
                 configuration.Commands.Add(opt);
             }
 
@@ -45,6 +46,7 @@ namespace BBConfigurator.Mapper
                 option.Command = cmd.Command;
                 option.Enable = cmd.Enable;
                 option.Order = cmd.Order;
+                option.Name = cmd.Name;
 
                 view.OptionsCollection.Add(option);
             }

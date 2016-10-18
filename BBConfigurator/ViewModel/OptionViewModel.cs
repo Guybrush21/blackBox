@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BBConfigurator
 {
-
     public class ConfigurationViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<String> ComPortsAvailableList { get; set; }
-
         private string _port;
 
-        public String PortName {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<String> ComPortsAvailableList { get; set; }
+
+        public ObservableCollection<OptionViewModel> OptionsCollection { get; set; }
+
+        public String PortName
+        {
             get { return _port; }
             set
             {
@@ -23,9 +23,6 @@ namespace BBConfigurator
                 NotifyPropertyChanged("PortName");
             }
         }
-        public ObservableCollection<OptionViewModel> OptionsCollection { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propName)
         {
@@ -39,27 +36,42 @@ namespace BBConfigurator
         private String command;
         private bool enable;
         private int order;
+        private string name; 
 
-        public int Order { get { return order; } set { this.order = value; } }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public String Command { get{return command;}
+        public String Name {
+            get {return name;}
+            set
+            {
+                this.name = value;
+                this.NotifyPropertyChanged("Name");
+            }
+        }
+
+        public String Command
+        {
+            get { return command; }
             set
             {
                 this.command = value;
                 this.NotifyPropertyChanged("Command");
             }
         }
-        public bool Enable {
-            get { return enable;}
+
+        public bool Enable
+        {
+            get { return enable; }
             set
             {
                 this.enable = value;
                 this.NotifyPropertyChanged("Enable");
             }
         }
+
         public bool IsExecutable { get; private set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public int Order { get { return order; } set { this.order = value; } }
 
         public void NotifyPropertyChanged(string propName)
         {

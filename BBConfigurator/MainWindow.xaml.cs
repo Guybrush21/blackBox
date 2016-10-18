@@ -2,13 +2,14 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
+using BBConfigurator.Worker;
 using Hardcodet.Wpf.TaskbarNotification;
 
 namespace BBConfigurator
 {
     public partial class MainWindow : Window
     {
-        private BlackboxRepository _bbRepository;
+        private BlackboxListner _bbRepository;
         private ConfigurationViewModel _configurationViewModel;
         private ConfiguratorRepository _configuratorRepository;
 
@@ -19,10 +20,9 @@ namespace BBConfigurator
         public MainWindow()
         {
             InitializeComponent();
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
+            
             Init();
-
+            
             DataContext = _configurationViewModel;
             
             Closing += OnClosing;
@@ -46,13 +46,13 @@ namespace BBConfigurator
                     baloon = BlackBRestart;
                     break;
                 case ActionEventArgs.ActionEnum.ProcessStarted:
-                    baloon = String.Format(StartProcess, e.Program);
+                    baloon = String.Format(StartProcess, e.Message);
                     break;
                 case ActionEventArgs.ActionEnum.ProcessStopped:
-                    baloon = String.Format(StopProcess, e.Program);
+                    baloon = String.Format(StopProcess, e.Message);
                     break;
                 case ActionEventArgs.ActionEnum.ExceptionHappen:
-                    baloon = "Exception occured";
+                    baloon = "An error occured";
                     break;
             }
             return baloon;
@@ -69,21 +69,16 @@ namespace BBConfigurator
             this.Close();
             Application.Current.Shutdown();
         }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Taskbar.ShowBalloonTip("Error", (e.ExceptionObject as Exception).Message, Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Error);
-        }
-
+        
         private void Init()
         {
-            _bbRepository = new BlackboxRepository();
+            _bbRepository = new BlackboxListner();
             _configuratorRepository = new ConfiguratorRepository();
 
             _configurationViewModel = LoadConfigurationViewModel();
             foreach (var el in _configurationViewModel.OptionsCollection)
             {
-                mainContent.Children.Add(new OptionUC() { DataContext = el });
+                mainContent.Children.Add(new OptionUC(_bbRepository) { DataContext = el });
             }
         }
 

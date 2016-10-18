@@ -10,6 +10,7 @@
         <TextBox x:Name="commandTxt" Text="{Binding Path=Command}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
         <Button x:Name="btnBrowse" Content="Browse..." Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnBrowse_Click"/>
         <Separator Width="35" Visibility="Hidden"/>
-        <CheckBox Content="Enable" x:Name="enableBool" IsChecked="{Binding Enable}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
+        <Label Content="Name" Margin="2"></Label> <TextBox x:Name="NameTextbox" Text="{Binding Name}" Margin="2" Width="100" />
+        <Button Content="Try" Margin="2" x:Name="TryButton" Click="TryButton_Click" ></Button>
     </StackPanel>
 </UserControl>

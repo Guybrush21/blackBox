@@ -21,9 +21,17 @@ namespace BBConfigurator
     /// </summary>
     public partial class OptionUC : UserControl
     {
+        private Worker.BlackboxListner _bbRepository;
+
         public OptionUC()
         {
             InitializeComponent();
+        }
+
+        public OptionUC(Worker.BlackboxListner _bbRepository)
+        {
+            InitializeComponent();
+            this._bbRepository = _bbRepository;
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -37,6 +45,12 @@ namespace BBConfigurator
             {
                 (this.DataContext as OptionViewModel).Command = dialog.FileName;
             }
+        }
+
+        private void TryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(!String.IsNullOrEmpty(commandTxt.Text))
+                _bbRepository.TestAction(orderLabel.Content.ToString());
         }
     }
 }

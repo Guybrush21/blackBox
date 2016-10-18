@@ -7,6 +7,7 @@ namespace BBCommon
 {
     public class Option
     {
+        public String Name { get; set; }
         public int Order { get; set; }
         public String Command { get; set; }
         public bool Enable { get; set; }
