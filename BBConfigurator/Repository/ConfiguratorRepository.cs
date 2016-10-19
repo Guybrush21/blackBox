@@ -8,7 +8,13 @@ using System.Xml.Serialization;
 
 namespace BBConfigurator.Repository
 {
-    public class ConfiguratorRepository
+    public interface IConfiguratorRepository
+    {
+        Configuration LoadConfiguration();
+        void SaveConfiguration(Configuration config);
+    }
+
+    public class ConfiguratorRepository : IConfiguratorRepository
     {
         private string savePath = "store.xml";
 
@@ -25,7 +31,7 @@ namespace BBConfigurator.Repository
         private Configuration Deserialize(string filename)
         {
             if (!File.Exists(filename))
-                return GenerateNewXml();
+                return GenerateNewConfiguration();
 
             XmlSerializer x = new XmlSerializer(typeof(Configuration));
             object obj;
@@ -36,7 +42,7 @@ namespace BBConfigurator.Repository
             return obj as Configuration;
         }
 
-        private Configuration GenerateNewXml()
+        private Configuration GenerateNewConfiguration()
         {
             Configuration config = new Configuration();
             config.Commands = new List<Option>();

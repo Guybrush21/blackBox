@@ -1,17 +1,18 @@
-﻿using BBConfigurator.Repository;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using BBConfigurator.Repository;
+using BBConfigurator.ViewModel;
 using BBConfigurator.Worker;
 using Hardcodet.Wpf.TaskbarNotification;
 
-namespace BBConfigurator
+namespace BBConfigurator.View
 {
     public partial class MainWindow : Window
     {
-        private BlackboxListner _bbRepository;
+        private IBlackboxListner _blackboxListner;
         private ConfigurationViewModel _configurationViewModel;
-        private ConfiguratorRepository _configuratorRepository;
+        private IConfiguratorRepository _configuratorRepository;
 
         private const string StopProcess = "{0} has been closed.";
         private const string StartProcess = "{0} has been started.";
@@ -26,11 +27,18 @@ namespace BBConfigurator
             DataContext = _configurationViewModel;
             
             Closing += OnClosing;
-            _bbRepository.OnAction += BbRepositoryOnOnAction;
-            _bbRepository.InitBlackbox();
+
+            _blackboxListner.OnAction += BlackboxListnerOnOnAction;
+            _blackboxListner.InitBlackbox();
         }
 
-        private void BbRepositoryOnOnAction(object sender, ActionEventArgs e)
+        public void ShowBallonTip(string title, string message, BalloonIcon icon)
+        {
+            Taskbar.ShowBalloonTip(title, message, icon);
+        }
+
+
+        private void BlackboxListnerOnOnAction(object sender, ActionEventArgs e)
         {
             String baloon = GetBallonText(e);
 
@@ -61,6 +69,9 @@ namespace BBConfigurator
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
             SaveConfiguration();
+
+            _blackboxListner.Restart();
+
             Taskbar.ShowBalloonTip("Save", "Configuration saved successfully", BalloonIcon.Info);
         }
 
@@ -72,13 +83,13 @@ namespace BBConfigurator
         
         private void Init()
         {
-            _bbRepository = new BlackboxListner();
+            _blackboxListner = new BlackboxListner();
             _configuratorRepository = new ConfiguratorRepository();
 
             _configurationViewModel = LoadConfigurationViewModel();
             foreach (var el in _configurationViewModel.OptionsCollection)
             {
-                mainContent.Children.Add(new OptionUC(_bbRepository) { DataContext = el });
+                mainContent.Children.Add(new OptionUC(_blackboxListner) { DataContext = el });
             }
         }
 
@@ -102,7 +113,7 @@ namespace BBConfigurator
 
         private void RestartMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            _bbRepository.Restart();
+            _blackboxListner.Restart();
             Taskbar.ShowBalloonTip("Restart", "BlackBox has restarted successfully", BalloonIcon.Info);
         }
 

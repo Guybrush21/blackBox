@@ -1,37 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using BBConfigurator.ViewModel;
 using Microsoft.Win32;
 
-namespace BBConfigurator
+namespace BBConfigurator.View
 {
     /// <summary>
     /// Interaction logic for OptionUC.xaml
     /// </summary>
     public partial class OptionUC : UserControl
     {
-        private Worker.BlackboxListner _bbRepository;
+        private Worker.IBlackboxListner _blackboxListner;
 
         public OptionUC()
         {
             InitializeComponent();
         }
 
-        public OptionUC(Worker.BlackboxListner _bbRepository)
+        public OptionUC(Worker.IBlackboxListner blackboxListner)
         {
             InitializeComponent();
-            this._bbRepository = _bbRepository;
+            this._blackboxListner = blackboxListner;
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -50,7 +40,7 @@ namespace BBConfigurator
         private void TryButton_Click(object sender, RoutedEventArgs e)
         {
             if(!String.IsNullOrEmpty(commandTxt.Text))
-                _bbRepository.TestAction(orderLabel.Content.ToString());
+                _blackboxListner.TestAction(orderLabel.Content.ToString());
         }
     }
 }

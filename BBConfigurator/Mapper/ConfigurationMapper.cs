@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using BBCommon;
+using BBConfigurator.ViewModel;
 
 namespace BBConfigurator.Mapper
 {

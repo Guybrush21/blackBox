@@ -9,7 +9,7 @@ using BBConfigurator.Repository;
 
 namespace BBConfigurator.Worker
 {
-    public class BlackboxListner
+    public class BlackboxListner : IBlackboxListner
     {
         static private Dictionary<int, Process> _processList;
         private Configuration _configuration;
@@ -22,7 +22,12 @@ namespace BBConfigurator.Worker
             var configRepo = new ConfiguratorRepository();
             _configuration = configRepo.LoadConfiguration();
             _processList = new Dictionary<int, Process>();
+            
+            InitSerialPort();
+        }
 
+        private void InitSerialPort()
+        {
             try
             {
                 if (!String.IsNullOrEmpty(_configuration.SerialPortName))
@@ -100,7 +105,7 @@ namespace BBConfigurator.Worker
         {
             var process = GetRunningProcess(option);
          
-            if (process.CloseMainWindow())
+            if (process != null && process.CloseMainWindow())
             {
                 process.WaitForExit(4000);
                 process.Close();
@@ -123,7 +128,7 @@ namespace BBConfigurator.Worker
             if (process.HasExited)
             {
                 process = Process.GetProcessesByName(
-                    Path.GetFileNameWithoutExtension(option.Command)).OrderByDescending(x => x.StartTime).First();
+                    Path.GetFileNameWithoutExtension(option.Command)).OrderByDescending(x => x.StartTime).FirstOrDefault();
             }
             return process;
         }
