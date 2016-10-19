@@ -11,9 +11,7 @@ namespace BlackBox
 {
     class Program
     {
-        static private Process ff, expolore;
-
-
+        
         static void Main(string[] args)
         {
             try
